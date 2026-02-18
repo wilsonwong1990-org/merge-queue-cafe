@@ -21,6 +21,7 @@
                     <span class="category">{{ item.category }}</span>
                     <p class="description">{{ item.description }}</p>
                     <p class="price">${{ "%.2f" | format(item.price) }}</p>
+                    <button class="fav-btn" onclick="this.classList.toggle('liked')">♡</button>
                 </div>
                 {% endfor %}
             </div>
