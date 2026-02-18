@@ -57,13 +57,14 @@ for branch, title, name, slot_id, cat, price, desc in DRINK_PRS:
         f'    }}'
     )
 
-    # Each PR replaces its unique slot comment with the drink item.
-    # Since each slot is on its own line, git can merge all 8 without conflicts.
-    search_str = f"# slot:{slot_id}"
-    replace_str = f"    {new_item},\n# slot:{slot_id}"
-
-    # For lists that start empty (OTHER_ITEMS), we also need to handle the
-    # empty list case — but since OTHER_ITEMS = [\n] now, we just replace the slot.
+    # Each PR replaces its unique slot comment with the drink item + the slot.
+    # Slots are inside the list brackets with proper indentation, so the result
+    # is valid Python and ruff-clean.
+    search_str = f"    # slot:{slot_id}"
+    replace_str = (
+        f"    {new_item},\n"
+        f"    # slot:{slot_id}"
+    )
 
     PRS.append({
         "branch": branch,

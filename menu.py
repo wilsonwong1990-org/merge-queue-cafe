@@ -9,14 +9,12 @@ COFFEE_ITEMS = [
         "price": 3.50,
         "description": "Classic house-brewed drip coffee.",
     },
+    # slot:espresso
+    # slot:latte
+    # slot:cappuccino
+    # slot:americano
+    # slot:cold-brew
 ]
-
-# --- new coffee drinks go below (one per line, do not reorder) ---
-# slot:espresso
-# slot:latte
-# slot:cappuccino
-# slot:americano
-# slot:cold-brew
 
 TEA_ITEMS = [
     {
@@ -25,17 +23,13 @@ TEA_ITEMS = [
         "price": 2.75,
         "description": "Steamed organic green tea.",
     },
+    # slot:matcha-latte
+    # slot:chai-latte
 ]
-
-# --- new tea drinks go below ---
-# slot:matcha-latte
-# slot:chai-latte
 
 OTHER_ITEMS = [
+    # slot:hot-chocolate
 ]
-
-# --- new other drinks go below ---
-# slot:hot-chocolate
 
 MENU_ITEMS = COFFEE_ITEMS + TEA_ITEMS + OTHER_ITEMS
 
