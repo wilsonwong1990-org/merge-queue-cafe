@@ -12,8 +12,11 @@
         <p class="tagline">Where every commit gets its turn.</p>
     </header>
     <main>
-        <section class="menu">
-            <h2>Our Menu</h2>
+<section class="menu">
+        <h2>Our Menu</h2>
+        <div class="sort-controls">
+            <button onclick="sortByPrice()">Sort by Price ↑</button>
+        </div>
             <div class="menu-grid">
                 {% for item in menu %}
                 <div class="menu-card">
@@ -29,5 +32,17 @@
     <footer>
         <p>&copy; 2026 Merge Queue Café</p>
     </footer>
+    <script>
+    function sortByPrice() {
+        const grid = document.querySelector('.menu-grid');
+        const cards = Array.from(grid.querySelectorAll('.menu-card'));
+        cards.sort((a, b) => {
+            const pa = parseFloat(a.querySelector('.price').textContent.replace('$', ''));
+            const pb = parseFloat(b.querySelector('.price').textContent.replace('$', ''));
+            return pa - pb;
+        });
+        cards.forEach(card => grid.appendChild(card));
+    }
+    </script>
 </body>
 </html>
