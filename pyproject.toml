@@ -1,0 +1,14 @@
+[project]
+name = "merge-queue-cafe"
+version = "0.1.0"
+description = "A demo café menu app for GitHub merge queue demos"
+requires-python = ">=3.12"
+dependencies = [
+    "flask>=3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.4",
+]
