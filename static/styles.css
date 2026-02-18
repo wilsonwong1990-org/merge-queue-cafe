@@ -46,6 +46,19 @@ main {
     gap: 1.5rem;
 }
 
+@media (max-width: 600px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    header h1 {
+        font-size: 1.8rem;
+    }
+    main {
+        padding: 0 0.5rem;
+    }
+}
+
 .menu-card {
     background: #fff;
     border: 1px solid #e0d6cc;
