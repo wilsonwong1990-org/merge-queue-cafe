@@ -11,7 +11,7 @@ import subprocess
 import sys
 import textwrap
 
-REPO = "wilsonwong1990-org/merge-queue-cafe"
+REPO = "SAML-test/merge-queue-cafe"
 
 # Each PR is: (branch_name, pr_title, pr_body, list_of_(filepath, content_patch))
 # content_patch is a tuple of (mode, data) where mode is "replace" or "append_to_list"

@@ -16,7 +16,7 @@ import subprocess
 import sys
 
 
-REPO = "wilsonwong1990-org/merge-queue-cafe"
+REPO = "SAML-test/merge-queue-cafe"
 
 
 def run(cmd, check=True):

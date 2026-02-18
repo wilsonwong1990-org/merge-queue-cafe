@@ -20,7 +20,7 @@ before they reach `main`.
 
 ```bash
 # Clone the repo
-git clone https://github.com/wilsonwong1990-org/merge-queue-cafe.git
+git clone https://github.com/SAML-test/merge-queue-cafe.git
 cd merge-queue-cafe
 
 # Install dependencies
@@ -54,7 +54,7 @@ Show what happens when PRs are merged without a queue:
 
 1. **Reset the repo** (see [Resetting for a Fresh Demo](#-resetting-for-a-fresh-demo) below)
 2. **Re-enable the merge queue** — Set the "Merge Queue" ruleset enforcement back to **Active**
-3. Open the [PR list](https://github.com/wilsonwong1990-org/merge-queue-cafe/pulls)
+3. Open the [PR list](https://github.com/SAML-test/merge-queue-cafe/pulls)
    and click **"Merge when ready"** on all 18 PRs
 4. Watch the **merge queue tab** — GitHub will:
    - Batch compatible PRs together
