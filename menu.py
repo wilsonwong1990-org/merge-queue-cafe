@@ -28,6 +28,12 @@ TEA_ITEMS = [
 ]
 
 OTHER_ITEMS = [
+    {
+        "name": "Hot Chocolate",
+        "category": "other",
+        "price": 4.50,
+        "description": "Rich dark chocolate melted into steamed milk.",
+    },
     # slot:hot-chocolate
 ]
 
