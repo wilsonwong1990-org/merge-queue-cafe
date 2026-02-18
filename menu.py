@@ -13,6 +13,12 @@ MENU_ITEMS = [
         "price": 2.75,
         "description": "Steamed organic green tea.",
     },
+    {
+        "name": "Americano",
+        "category": "coffee",
+        "price": 4.25,
+        "description": "Espresso diluted with hot water for a smooth finish.",
+    },
 ]
 
 
