@@ -14,6 +14,10 @@ COFFEE_ITEMS = [
         "category": "coffee",
         "price": 5.50,
         "description": "Espresso with steamed milk and a touch of foam.",
+        "name": "Espresso",
+        "category": "coffee",
+        "price": 4.00,
+        "description": "A bold, concentrated shot of pure coffee.",
     },
 ]
 
