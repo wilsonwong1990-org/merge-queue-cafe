@@ -13,6 +13,12 @@ MENU_ITEMS = [
         "price": 2.75,
         "description": "Steamed organic green tea.",
     },
+    {
+        "name": "Hot Chocolate",
+        "category": "other",
+        "price": 4.50,
+        "description": "Rich dark chocolate melted into steamed milk.",
+    },
 ]
 
 
