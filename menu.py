@@ -16,6 +16,12 @@ COFFEE_ITEMS = [
         "description": "A bold, concentrated shot of pure coffee.",
     },
     # slot:espresso
+    {
+        "name": "Latte",
+        "category": "coffee",
+        "price": 5.50,
+        "description": "Espresso with steamed milk and a touch of foam.",
+    },
     # slot:latte
     # slot:cappuccino
     # slot:americano
