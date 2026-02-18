@@ -13,6 +13,12 @@ MENU_ITEMS = [
         "price": 2.75,
         "description": "Steamed organic green tea.",
     },
+    {
+        "name": "Latte",
+        "category": "coffee",
+        "price": 5.50,
+        "description": "Espresso with steamed milk and a touch of foam.",
+    },
 ]
 
 
