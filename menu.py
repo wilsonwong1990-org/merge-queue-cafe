@@ -35,6 +35,12 @@ OTHER_ITEMS = [
 ]
 
 # --- new other drinks go below ---
+    {
+        "name": "Hot Chocolate",
+        "category": "other",
+        "price": 4.50,
+        "description": "Rich dark chocolate melted into steamed milk.",
+    },
 # slot:hot-chocolate
 
 MENU_ITEMS = COFFEE_ITEMS + TEA_ITEMS + OTHER_ITEMS
