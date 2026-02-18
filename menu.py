@@ -12,6 +12,12 @@ COFFEE_ITEMS = [
 ]
 
 # --- new coffee drinks go below (one per line, do not reorder) ---
+    {
+        "name": "Espresso",
+        "category": "coffee",
+        "price": 4.00,
+        "description": "A bold, concentrated shot of pure coffee.",
+    },
 # slot:espresso
 # slot:latte
 # slot:cappuccino
