@@ -8,9 +8,10 @@ This script will:
 4. Re-run create_prs.py to recreate all 18 PRs
 
 Usage:
-    python3 reset_demo.py
+    python3 scripts/reset_demo.py
 """
 
+import os
 import subprocess
 import sys
 
@@ -70,9 +71,11 @@ def main():
 
     # 5. Recreate all PRs
     print("\n[5/5] Recreating all 18 PRs...")
+    repo_root = subprocess.check_output(["git", "rev-parse", "--show-toplevel"]).decode().strip()
+    scripts_dir = os.path.join(repo_root, "scripts")
     result = subprocess.run(
-        [sys.executable, "create_prs.py"],
-        cwd=subprocess.check_output(["git", "rev-parse", "--show-toplevel"]).decode().strip(),
+        [sys.executable, os.path.join(scripts_dir, "create_prs.py")],
+        cwd=repo_root,
     )
     if result.returncode != 0:
         print("  ❌ Failed to create PRs. Check create_prs.py output above.")
