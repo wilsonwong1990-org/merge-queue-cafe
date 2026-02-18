@@ -14,9 +14,11 @@ Usage:
 import os
 import subprocess
 import sys
+from pathlib import Path
+from dotenv import load_dotenv
 
-
-REPO = "SAML-test/merge-queue-cafe"
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+REPO = os.environ["REPO"]
 
 
 def run(cmd, check=True):

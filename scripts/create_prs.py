@@ -7,11 +7,15 @@ Usage:
 Requires: gh CLI authenticated with push access to the repo.
 """
 
+import os
 import subprocess
 import sys
 import textwrap
+from pathlib import Path
+from dotenv import load_dotenv
 
-REPO = "SAML-test/merge-queue-cafe"
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+REPO = os.environ["REPO"]
 
 # Each PR is: (branch_name, pr_title, pr_body, list_of_(filepath, content_patch))
 # content_patch is a tuple of (mode, data) where mode is "replace" or "append_to_list"
