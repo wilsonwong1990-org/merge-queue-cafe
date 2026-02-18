@@ -1,6 +1,6 @@
 """Café menu data and helpers."""
 
-MAX_MENU_SIZE = 6
+MAX_MENU_SIZE = 4
 
 COFFEE_ITEMS = [
     {
@@ -9,25 +9,14 @@ COFFEE_ITEMS = [
         "price": 3.50,
         "description": "Classic house-brewed drip coffee.",
     },
-    {
-        "name": "Cappuccino",
-        "category": "coffee",
-        "price": 5.25,
-        "description": "Equal parts espresso, steamed milk, and foam.",
-    },
-    {
-        "name": "Latte",
-        "category": "coffee",
-        "price": 5.50,
-        "description": "Espresso with steamed milk and a touch of foam.",
-    },
-    {
-        "name": "Espresso",
-        "category": "coffee",
-        "price": 4.00,
-        "description": "A bold, concentrated shot of pure coffee.",
-    },
 ]
+
+# --- new coffee drinks go below (one per line, do not reorder) ---
+# slot:espresso
+# slot:latte
+# slot:cappuccino
+# slot:americano
+# slot:cold-brew
 
 TEA_ITEMS = [
     {
@@ -38,7 +27,15 @@ TEA_ITEMS = [
     },
 ]
 
-OTHER_ITEMS = []
+# --- new tea drinks go below ---
+# slot:matcha-latte
+# slot:chai-latte
+
+OTHER_ITEMS = [
+]
+
+# --- new other drinks go below ---
+# slot:hot-chocolate
 
 MENU_ITEMS = COFFEE_ITEMS + TEA_ITEMS + OTHER_ITEMS
 

@@ -20,63 +20,55 @@ PRS = []
 
 # ---------------------------------------------------------------------------
 # Helper to build a menu.py that adds a drink.
-# Each PR adds to a DIFFERENT category list so they merge cleanly (no git
-# conflicts), but collectively they break the menu size and avg price tests.
-# Base: 2 items, MAX_MENU_SIZE=6.  Each PR adds 1 item → passes alone (3 items).
-# But 5+ drink PRs merged = 7+ items → test_menu_size_within_limit FAILS.
-# Also, expensive drinks push average price above $5 → test_average_price FAILS.
+# Each PR replaces its OWN unique "# slot:xxx" comment with a drink dict.
+# This guarantees zero git merge conflicts between drink PRs.
+# Base: 2 items, MAX_MENU_SIZE=4.  Each PR adds 1 item → passes alone (3 items).
+# But 3+ drink PRs merged = 5+ items → test_menu_size_within_limit FAILS.
+# Also, expensive drinks push average price above $4.50 → test_average_price FAILS.
 # ---------------------------------------------------------------------------
 
 DRINK_PRS = [
-    # (branch, title, drink_name, target_list, price, description)
-    ("add-espresso", "Add Espresso to menu", "Espresso", "COFFEE_ITEMS", 4.00,
+    # (branch, title, drink_name, slot_id, category, price, description)
+    ("add-espresso", "Add Espresso to menu", "Espresso", "espresso", "coffee", 4.00,
      "A bold, concentrated shot of pure coffee."),
-    ("add-latte", "Add Latte to menu", "Latte", "COFFEE_ITEMS", 5.50,
+    ("add-latte", "Add Latte to menu", "Latte", "latte", "coffee", 5.50,
      "Espresso with steamed milk and a touch of foam."),
-    ("add-cappuccino", "Add Cappuccino to menu", "Cappuccino", "COFFEE_ITEMS", 5.25,
+    ("add-cappuccino", "Add Cappuccino to menu", "Cappuccino", "cappuccino", "coffee", 5.25,
      "Equal parts espresso, steamed milk, and foam."),
-    ("add-americano", "Add Americano to menu", "Americano", "COFFEE_ITEMS", 4.25,
+    ("add-americano", "Add Americano to menu", "Americano", "americano", "coffee", 4.25,
      "Espresso diluted with hot water for a smooth finish."),
-    ("add-cold-brew", "Add Cold Brew to menu", "Cold Brew", "COFFEE_ITEMS", 5.00,
+    ("add-cold-brew", "Add Cold Brew to menu", "Cold Brew", "cold-brew", "coffee", 5.00,
      "Slow-steeped for 12 hours, served over ice."),
-    ("add-matcha-latte", "Add Matcha Latte to menu", "Matcha Latte", "TEA_ITEMS", 5.75,
+    ("add-matcha-latte", "Add Matcha Latte to menu", "Matcha Latte", "matcha-latte", "tea", 5.75,
      "Ceremonial-grade matcha whisked with oat milk."),
-    ("add-chai-latte", "Add Chai Latte to menu", "Chai Latte", "TEA_ITEMS", 5.50,
+    ("add-chai-latte", "Add Chai Latte to menu", "Chai Latte", "chai-latte", "tea", 5.50,
      "Spiced black tea with steamed milk and honey."),
-    ("add-hot-chocolate", "Add Hot Chocolate to menu", "Hot Chocolate", "OTHER_ITEMS", 4.50,
+    ("add-hot-chocolate", "Add Hot Chocolate to menu", "Hot Chocolate", "hot-chocolate", "other", 4.50,
      "Rich dark chocolate melted into steamed milk."),
 ]
 
-for branch, title, name, target_list, price, desc in DRINK_PRS:
-    # Determine the category from the target list
-    cat = {"COFFEE_ITEMS": "coffee", "TEA_ITEMS": "tea", "OTHER_ITEMS": "other"}[target_list]
-
+for branch, title, name, slot_id, cat, price, desc in DRINK_PRS:
     new_item = (
-        f'    {{\n'
+        f'{{\n'
         f'        "name": "{name}",\n'
         f'        "category": "{cat}",\n'
         f'        "price": {price:.2f},\n'
         f'        "description": "{desc}",\n'
-        f'    }},\n'
+        f'    }}'
     )
 
-    # Each PR appends to the END of its specific category list.
-    # We find the ']' that closes that list. To make the search unique,
-    # we search for the last item in that list + the closing bracket.
-    if target_list == "COFFEE_ITEMS":
-        search_str = '    },\n]\n\nTEA_ITEMS'
-        replace_str = '    },\n' + new_item + ']\n\nTEA_ITEMS'
-    elif target_list == "TEA_ITEMS":
-        search_str = '    },\n]\n\nOTHER_ITEMS'
-        replace_str = '    },\n' + new_item + ']\n\nOTHER_ITEMS'
-    else:  # OTHER_ITEMS
-        search_str = 'OTHER_ITEMS = []'
-        replace_str = 'OTHER_ITEMS = [\n' + new_item + ']'
+    # Each PR replaces its unique slot comment with the drink item.
+    # Since each slot is on its own line, git can merge all 8 without conflicts.
+    search_str = f"# slot:{slot_id}"
+    replace_str = f"    {new_item},\n# slot:{slot_id}"
+
+    # For lists that start empty (OTHER_ITEMS), we also need to handle the
+    # empty list case — but since OTHER_ITEMS = [\n] now, we just replace the slot.
 
     PRS.append({
         "branch": branch,
         "title": title,
-        "body": f"Adds **{name}** (${price:.2f}) to the café menu under the *{cat}* category.\n\n✅ All tests pass — menu stays within the 6-item limit.",
+        "body": f"Adds **{name}** (${price:.2f}) to the café menu under the *{cat}* category.\n\n✅ All tests pass — menu stays within the 4-item limit.",
         "changes": [
             {
                 "file": "menu.py",

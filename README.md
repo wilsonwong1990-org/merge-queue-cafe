@@ -43,10 +43,10 @@ Show what happens when PRs are merged without a queue:
 
 1. **Disable the merge queue** — Go to **Settings → Rules → Rulesets → "Merge Queue"**
    and set enforcement to **Disabled**
-2. **Merge drink PRs one at a time** (#1 through #5)
+2. **Merge drink PRs one at a time** (#1 through #3)
    - Each PR passes CI individually ✅
-   - After the 5th merges, `main` has **7 menu items** — exceeding `MAX_MENU_SIZE = 6`
-   - The 6th drink PR's CI now **fails** when rebased on `main` ❌
+   - After the 3rd merges, `main` has **5 menu items** — exceeding `MAX_MENU_SIZE = 4`
+   - The 4th drink PR's CI now **fails** when rebased on `main` ❌
 3. **Talking point:** _"Each developer did their job correctly. Each PR passed CI.
    But the combination broke the build. This is the semantic conflict problem."_
 
@@ -64,16 +64,16 @@ Show what happens when PRs are merged without a queue:
 
 ### What Breaks and When
 
-Each drink PR adds 1 item. Base has 2 items. The tests enforce a max of 6 items
+Each drink PR adds 1 item. Base has 2 items. The tests enforce a max of 4 items
 and a max average price of $4.50.
 
-| Drink PRs merged | Total items | Size test (max 6) | Avg price test (max $4.50) |
+| Drink PRs merged | Total items | Size test (max 4) | Avg price test (max $4.50) |
 |:----------------:|:-----------:|:-----------------:|:--------------------------:|
 | 1                | 3           | ✅ Pass           | ✅ Pass                    |
 | 2                | 4           | ✅ Pass           | ✅ Pass                    |
-| 3                | 5           | ✅ Pass           | ✅ Pass                    |
-| 4                | 6           | ✅ Pass           | ✅ Pass                    |
-| **5**            | **7**       | ❌ **Fail**       | ✅ Pass                    |
+| **3**            | **5**       | ❌ **Fail**       | ✅ Pass                    |
+| 4                | 6           | ❌ Fail           | ✅ Pass                    |
+| 5                | 7           | ❌ Fail           | ✅ Pass                    |
 | 6                | 8           | ❌ Fail           | ✅ Pass                    |
 | 7                | 9           | ❌ Fail           | ✅ Pass                    |
 | **8 (all)**      | **10**      | ❌ Fail           | ❌ **Fail**                |
