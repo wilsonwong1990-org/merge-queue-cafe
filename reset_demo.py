@@ -46,20 +46,11 @@ def main():
     run("git checkout main")
     run("git fetch origin")
 
-    # 3. Force-reset main to the commit that has the setup scripts
-    #    (second commit on main — keeps create_prs.py and reset_demo.py)
-    print("\n[3/5] Resetting main to base + scripts commit...")
-    # Find the latest commit on main that isn't from a merged PR
-    # This is the commit that added create_prs.py and reset_demo.py
-    base_commit = run(
-        "git log main --oneline --reverse -- create_prs.py | head -1 | cut -d' ' -f1"
-    )
-    if not base_commit:
-        # Fallback: just use the second commit
-        base_commit = run("git rev-list --reverse HEAD | sed -n '2p'")
-    run(f"git reset --hard {base_commit}")
+    # 3. Force-reset main to the tagged base commit
+    print("\n[3/5] Resetting main to demo-base tag...")
+    run("git reset --hard demo-base")
     run("git push origin main --force")
-    print(f"       Reset to {base_commit[:8]}")
+    print("       Reset to demo-base")
 
     # 4. Delete remaining remote branches
     print("\n[4/5] Cleaning up remote branches...")
