@@ -9,6 +9,12 @@ COFFEE_ITEMS = [
         "price": 3.50,
         "description": "Classic house-brewed drip coffee.",
     },
+    {
+        "name": "Americano",
+        "category": "coffee",
+        "price": 4.25,
+        "description": "Espresso diluted with hot water for a smooth finish.",
+    },
 ]
 
 TEA_ITEMS = [
