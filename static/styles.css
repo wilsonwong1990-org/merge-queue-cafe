@@ -49,8 +49,15 @@ main {
 .menu-card {
     background: #fff;
     border: 1px solid #e0d6cc;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(59, 47, 47, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(59, 47, 47, 0.15);
 }
 
 .menu-card h3 {
