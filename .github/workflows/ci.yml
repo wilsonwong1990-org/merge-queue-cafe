@@ -75,7 +75,7 @@ jobs:
               });
             }
             
-            // For merge_group events, find and comment on all PRs in the group
+            // For merge_group events, find and comment on the PR associated with the merge group
             if (isMergeGroup) {
               // Extract PR numbers from the merge group head ref
               // Format: refs/heads/gh-readonly-queue/{base_branch}/pr-{number}-{sha}
@@ -90,5 +90,7 @@ jobs:
                   issue_number: prNumber,
                   body: comment
                 });
+              } else {
+                console.error(`Could not extract PR number from merge group head_ref: ${headRef}`);
               }
             }
