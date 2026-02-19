@@ -79,17 +79,22 @@ jobs:
               // Extract PR number from the merge group head ref
               // Format: refs/heads/gh-readonly-queue/{base_branch}/pr-{number}-{sha}
               const headRef = context.payload.merge_group.head_ref;
-              const prMatch = headRef.match(/pr-(\d+)-/);
               
-              if (prMatch) {
-                const prNumber = parseInt(prMatch[1]);
-                await github.rest.issues.createComment({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: prNumber,
-                  body: comment
-                });
+              if (!headRef) {
+                core.error('Merge group head_ref is undefined. PR will not receive a failure notification.');
               } else {
-                core.error(`Could not extract PR number from merge group head_ref: ${headRef}. PR will not receive a failure notification. Please check the workflow run for details.`);
+                const prMatch = headRef.match(/pr-(\d+)-/);
+                
+                if (prMatch) {
+                  const prNumber = parseInt(prMatch[1]);
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: prNumber,
+                    body: comment
+                  });
+                } else {
+                  core.error(`Could not extract PR number from merge group head_ref: ${headRef}. PR will not receive a failure notification. Expected format: refs/heads/gh-readonly-queue/{base_branch}/pr-{number}-{sha}. Please check the workflow run for details.`);
+                }
               }
             }
