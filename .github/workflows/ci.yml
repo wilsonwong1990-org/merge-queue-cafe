@@ -15,10 +15,51 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
+        id: install
         run: pip install -r requirements.txt
 
       - name: Lint with ruff
+        id: lint
         run: ruff check .
 
       - name: Run tests
+        id: test
         run: pytest tests/ -v
+
+      - name: Comment on PR with failure details
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const steps = {
+              install: '${{ steps.install.outcome }}',
+              lint: '${{ steps.lint.outcome }}',
+              test: '${{ steps.test.outcome }}'
+            };
+            
+            const failedSteps = Object.entries(steps)
+              .filter(([_, outcome]) => outcome === 'failure')
+              .map(([step, _]) => step);
+            
+            let comment = `## ❌ CI Workflow Failed\n\n`;
+            comment += `**Failed step(s):** ${failedSteps.join(', ')}\n\n`;
+            comment += '### Failure Details:\n\n';
+            
+            if (steps.install === 'failure') {
+              comment += '- **Install dependencies** - Failed to install Python dependencies\n';
+            }
+            if (steps.lint === 'failure') {
+              comment += '- **Lint with ruff** - Code linting failed. Run `ruff check .` locally to see issues\n';
+            }
+            if (steps.test === 'failure') {
+              comment += '- **Run tests** - Tests failed. Run `pytest tests/ -v` locally to see failures\n';
+            }
+            
+            comment += `\n**Workflow run:** ${context.payload.repository.html_url}/actions/runs/${context.runId}\n`;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: comment
+            });

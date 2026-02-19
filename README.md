@@ -104,6 +104,16 @@ If you only want to create the PRs without resetting (e.g., on first setup):
 python3 scripts/create_prs.py
 ```
 
+### Setting Up After Forking
+
+Rulesets are **not** copied when you fork a repository. To recreate the merge queue
+ruleset on your fork:
+
+```bash
+# Update .env with your fork's owner/repo
+python3 scripts/create_ruleset.py
+```
+
 ---
 
 ## 📋 The 18 PRs
@@ -163,6 +173,7 @@ merge-queue-cafe/
 ├── .github/workflows/ci.yml      ← CI: pytest + ruff
 ├── scripts/
 │   ├── create_prs.py              ← Creates all 18 PRs
+│   ├── create_ruleset.py          ← Creates the merge queue ruleset
 │   └── reset_demo.py              ← Resets repo for fresh demo
 ├── static/styles.css
 ├── templates/index.html
