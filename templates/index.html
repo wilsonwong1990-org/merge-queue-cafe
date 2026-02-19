@@ -12,8 +12,14 @@
         <p class="tagline">Where every commit gets its turn.</p>
     </header>
     <main>
-        <section class="menu">
-            <h2>Our Menu</h2>
+<section class="menu">
+        <h2>Our Menu</h2>
+        <div class="category-tabs">
+            <button class="tab active" onclick="filterCategory('all')">All</button>
+            {% for cat in categories %}
+            <button class="tab" onclick="filterCategory('{{ cat }}')">{{ cat|capitalize }}</button>
+            {% endfor %}
+        </div>
             <div class="menu-grid">
                 {% for item in menu %}
                 <div class="menu-card">
@@ -29,5 +35,15 @@
     <footer>
         <p>&copy; 2026 Merge Queue Café</p>
     </footer>
+    <script>
+    function filterCategory(cat) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        event.target.classList.add('active');
+        document.querySelectorAll('.menu-card').forEach(card => {
+            const cardCat = card.querySelector('.category').textContent.toLowerCase();
+            card.style.display = (cat === 'all' || cardCat === cat) ? '' : 'none';
+        });
+    }
+    </script>
 </body>
 </html>
