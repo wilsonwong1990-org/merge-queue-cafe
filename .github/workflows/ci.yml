@@ -55,7 +55,7 @@ jobs:
               comment += '- **Run tests** - Tests failed. Run `pytest tests/ -v` locally to see failures\n';
             }
             
-            comment += `\n**Workflow run:** ${context.payload.pull_request.html_url}/checks\n`;
+            comment += `\n**Workflow run:** ${context.payload.repository.html_url}/actions/runs/${context.runId}\n`;
             
             await github.rest.issues.createComment({
               owner: context.repo.owner,
