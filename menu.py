@@ -9,6 +9,12 @@ COFFEE_ITEMS = [
         "price": 3.50,
         "description": "Classic house-brewed drip coffee.",
     },
+    {
+        "name": "Espresso",
+        "category": "coffee",
+        "price": 4.00,
+        "description": "A bold, concentrated shot of pure coffee.",
+    },
     # slot:espresso
     # slot:latte
     # slot:cappuccino
