@@ -81,7 +81,7 @@ def main():
     result = subprocess.run(cmd, input=payload, capture_output=True, text=True)
 
     if result.returncode != 0:
-        print(f"  STDERR: {result.stderr.strip()}")
+        print(f"  Failed to create ruleset: {result.stderr.strip()}")
         sys.exit(1)
 
     print("\n✅ Ruleset created!\n")
