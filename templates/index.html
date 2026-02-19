@@ -12,8 +12,11 @@
         <p class="tagline">Where every commit gets its turn.</p>
     </header>
     <main>
-        <section class="menu">
-            <h2>Our Menu</h2>
+<section class="menu">
+        <h2>Our Menu</h2>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search the menu..." onkeyup="filterMenu()">
+        </div>
             <div class="menu-grid">
                 {% for item in menu %}
                 <div class="menu-card">
@@ -29,5 +32,14 @@
     <footer>
         <p>&copy; 2026 Merge Queue Café</p>
     </footer>
+    <script>
+    function filterMenu() {
+        const q = document.getElementById('search').value.toLowerCase();
+        document.querySelectorAll('.menu-card').forEach(card => {
+            const text = card.textContent.toLowerCase();
+            card.style.display = text.includes(q) ? '' : 'none';
+        });
+    }
+    </script>
 </body>
 </html>
