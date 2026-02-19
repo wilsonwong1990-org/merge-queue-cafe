@@ -77,7 +77,7 @@ jobs:
             
             // For merge_group events, find and comment on the PR associated with the merge group
             if (isMergeGroup) {
-              // Extract PR numbers from the merge group head ref
+              // Extract PR number from the merge group head ref
               // Format: refs/heads/gh-readonly-queue/{base_branch}/pr-{number}-{sha}
               const headRef = context.payload.merge_group.head_ref;
               const prMatch = headRef.match(/pr-(\d+)-/);
