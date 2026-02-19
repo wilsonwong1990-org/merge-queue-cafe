@@ -12,6 +12,12 @@ COFFEE_ITEMS = [
     # slot:espresso
     # slot:latte
     # slot:cappuccino
+    {
+        "name": "Americano",
+        "category": "coffee",
+        "price": 4.25,
+        "description": "Espresso diluted with hot water for a smooth finish.",
+    },
     # slot:americano
     # slot:cold-brew
 ]
