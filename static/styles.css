@@ -1,5 +1,22 @@
 /* Merge Queue Café — base styles */
 
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a2e;
+        color: #e0d6cc;
+    }
+    header {
+        background-color: #16213e;
+    }
+    .menu-card {
+        background: #0f3460;
+        border-color: #1a1a2e;
+    }
+    .price {
+        color: #e9b872;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
